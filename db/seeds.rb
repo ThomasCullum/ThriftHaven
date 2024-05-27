@@ -7,3 +7,20 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+require 'faker'
+p "deleting previous nonsense"
+Item.delete_all
+p "adding new things"
+
+20.times do
+  Item.create(
+    name: Faker::Vehicle.manufacture,
+    category: ['Top', 'Bottom', 'Shoes', 'Accessories'].sample,
+    description: Faker::TvShows::BigBangTheory.quote,
+    rating: [1,2,3,4,5].sample
+  )
+  p "item added"
+end
+
+p "done"
