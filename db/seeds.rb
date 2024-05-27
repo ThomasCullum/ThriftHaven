@@ -13,6 +13,18 @@ p "deleting previous nonsense"
 Item.delete_all
 p "adding new things"
 
+10.times do
+  User.create(
+    # first_name: Faker::ProgrammingLanguage.name,
+    # last_name: Faker::ProgrammingLanguage.name ,
+    # address: Faker::Address.full_address,
+    email: "#{first_name}#{last_name}@gmail.com",
+    encrypted_password: Faker::ProgrammingLanguage.name
+
+  )
+  p "item added"
+end
+
 20.times do
   Item.create(
     name: Faker::Vehicle.manufacture,
@@ -22,5 +34,7 @@ p "adding new things"
   )
   p "item added"
 end
+
+
 
 p "done"
