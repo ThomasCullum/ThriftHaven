@@ -19,7 +19,7 @@ p "adding new things"
     # last_name: Faker::ProgrammingLanguage.name ,
     # address: Faker::Address.full_address,
     email: "#{Faker::Vehicle.manufacture}@gmail.com",
-    encrypted_password: Faker::ProgrammingLanguage.name
+    password: Faker::ProgrammingLanguage.name
   )
   p "user added"
 end
@@ -34,7 +34,5 @@ end
   )
   p "item added"
 end
-
-
 
 p "done"
