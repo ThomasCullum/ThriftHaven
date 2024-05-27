@@ -18,11 +18,10 @@ p "adding new things"
     # first_name: Faker::ProgrammingLanguage.name,
     # last_name: Faker::ProgrammingLanguage.name ,
     # address: Faker::Address.full_address,
-    email: "#{first_name}#{last_name}@gmail.com",
+    email: "#{Faker::Vehicle.manufacture}@gmail.com",
     encrypted_password: Faker::ProgrammingLanguage.name
-
   )
-  p "item added"
+  p "user added"
 end
 
 20.times do
@@ -30,7 +29,8 @@ end
     name: Faker::Vehicle.manufacture,
     category: ['Top', 'Bottom', 'Shoes', 'Accessories'].sample,
     description: Faker::TvShows::BigBangTheory.quote,
-    rating: [1, 2, 3, 4, 5].sample
+    rating: [1,2,3,4,5].sample,
+    user_id: [1,2,3,4,5,6,7,8,9,10].sample
   )
   p "item added"
 end
