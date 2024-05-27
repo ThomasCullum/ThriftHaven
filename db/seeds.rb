@@ -30,7 +30,7 @@ end
     name: Faker::Vehicle.manufacture,
     category: ['Top', 'Bottom', 'Shoes', 'Accessories'].sample,
     description: Faker::TvShows::BigBangTheory.quote,
-    rating: [1,2,3,4,5].sample
+    rating: [1, 2, 3, 4, 5].sample
   )
   p "item added"
 end
