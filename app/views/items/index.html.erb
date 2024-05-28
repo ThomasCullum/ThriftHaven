@@ -1,4 +1,82 @@
-<div class="container mt-5 text-center">
+<header>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-scroll">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#!">ThriftHaven</a>
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#!">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!">Attractions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!">Opinions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!">Contact</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-flex flex-row">
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="#!">
+              <i class="fas fa-shopping-cart"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="#!">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="#!">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!--Section: Design Block-->
+  <section>
+    <div id="intro" class="bg-image" style="
+        background-image: url('https://i.pinimg.com/564x/e6/e3/40/e6e340066c627f0e7cbee2dae68d0945.jpg');
+        height: 100vh;
+      ">
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="container d-flex justify-content-center align-items-center h-100">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <h1 class="mb-0 text-white display-1"></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Section: Design Block-->
+</header>
+
+ <main>
+   <div class="container my-5 py-5"></div>
+</main>
+
+
+<div class="container">
   <h1>All Available items</h1>
   <hr>
   <div class="container mt5 text-center">
@@ -16,21 +94,20 @@
     </div>
   </div>
   <hr>
-
+<div class=card-show>
   <div class="row">
-    <% @items.each do |item| %>
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <div class="card-body">
-            <h5 class="card-title"><%= item.name %></h5>
-            <p class="card-text"><%= item.description %></p>
-            <p class="card-text"><small class="text-muted"><%= item.category %></small></p>
-            <p class="card-text"><strong><%= item.rating %></strong></p>
 
-            <%= link_to 'View Details', item_path(item), class: 'btn btn-primary' %>
-          </div>
+   <div class="row">
+  <% @items.each do |item| %>
+    <div class="col-md-4">
+      <div class="card" onclick="document.getElementById('link-<%= item.id %>').click()">
+        <div class="card-description">
+          <img class="item-img" src="https://www.corebase-clothing.com/cdn/shop/products/Premium-T-shirt-Black-1080-new-230223_79bfcb44-4682-4fc5-869d-2efc4f7fe20c.jpg?v=1677167966"/>
+          <h5 class="card-title"><%= item.name %></h5>
+          <p><small class="text-muted"><%= item.category %></small></p>
+          <%= link_to 'View Details', item_path(item), id: "link-#{item.id}", class: 'card-button' %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
