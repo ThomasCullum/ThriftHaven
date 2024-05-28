@@ -1,9 +1,21 @@
 <div class="container mt-5">
-  <h1><%= @item.name %></h1>
 
-  <p><%= @item.description %></p>
-  <p><strong>Category:</strong> <%= @item.category %></p>
-  <p><strong>Rating:</strong> <%= @item.rating %></p>
-
+  <div class="card_show">
+  <h1 class="card_title"><%= @item.name %></h1>
+  <div class="card_content d-flex ml-10">
+  <div>
+    <p><%= @item.description %></p>
+    <p><strong>Category:</strong> <%= @item.category %></p>
+    <p><strong>Rating:</strong> <%= @item.rating %></p>
+  </div>
+    <div class="card__content img">
+  <img class="fit-picture" src="https://www.corebase-clothing.com/cdn/shop/products/Premium-T-shirt-Black-1080-new-230223_79bfcb44-4682-4fc5-869d-2efc4f7fe20c.jpg?v=1677167966"/>
+    </div>
+  </div>
+  <div class="card__footer">
+    <div class="card_footer .button:hover">
   <%= link_to 'Back to items', items_path, class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  </div>
 </div>
