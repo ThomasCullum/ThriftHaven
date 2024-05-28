@@ -1,13 +1,25 @@
-<div class="container">
-<h1>Items</h1>
+<div class="container mt-5">
+  <h1>All Available items</h1>
+  <hr>
+  <div class="container mt5 text-center">
+  <%= link_to 'Add a item', new_item_path, class: 'btn btn-primary' %>
+  </div>
+  <hr>
 
-<ul>
-  <% @items.each do |item| %>
-    <li><%= link_to item.name, item_path(item) %></li>
-  <% end %>
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <p class="card-text"><%= item.description %></p>
+            <p class="card-text"><small class="text-muted"><%= item.category %></small></p>
+            <p class="card-text"><strong><%= item.rating %></strong></p>
 
-</ul>
-<div>
-<%=link_to "add new item", new_item_path %>
-</div>
+            <%= link_to 'View Details', item_path(item), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

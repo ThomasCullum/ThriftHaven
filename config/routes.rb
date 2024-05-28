@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   # ADDITIONAL ROUTES
-  resources :user, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  resources :item, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :bid, only: [:new, :create]
+  resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    resources :bids, only: [:new, :create]
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
