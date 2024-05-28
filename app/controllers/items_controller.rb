@@ -1,10 +1,14 @@
 class ItemsController < ApplicationController
   def show
-    @items = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def index
-    @items = Item.all
+    if params[:query].present?
+      @items = Item.where("name LIKE ?", "%#{params[:query]}%")
+    else
+      @items = Item.all
+    end
   end
 
   def new
@@ -12,11 +16,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @items = Item.create(item_params)
+    @item = Item.create(item_params)
     redirect_to item_path(@items)
   end
   def edit
-    @items = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def update

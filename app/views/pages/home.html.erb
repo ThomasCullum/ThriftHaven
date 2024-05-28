@@ -1,2 +1,8 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container text-center justify-content-center">
+<h1>ThriftHaven</h1>
+<hr>
+<div class="input-group mb-3">
+  <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: 'Search items...' %>
+  <button class="btn btn-outline-secondary" type="submit">Search</button>
+</div>
+</div>
