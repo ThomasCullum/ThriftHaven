@@ -15,9 +15,9 @@ p "adding new things"
 
 10.times do
   User.create(
-    # first_name: Faker::ProgrammingLanguage.name,
-    # last_name: Faker::ProgrammingLanguage.name ,
-    # address: Faker::Address.full_address,
+    first_name: Faker::ProgrammingLanguage.name,
+    last_name: Faker::ProgrammingLanguage.name ,
+    address: Faker::Address.full_address,
     email: "#{Faker::Vehicle.manufacture}@gmail.com",
     password: Faker::ProgrammingLanguage.name
   )
