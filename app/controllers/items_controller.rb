@@ -4,10 +4,16 @@ class ItemsController < ApplicationController
   end
 
   def index
+    # if params[:query].present?
+    #   @items = Item.where("name LIKE ?", "%#{params[:query]}%")
+    # else
+    #   @items = Item.all
+    # end
+
+    @items = Item.all
     if params[:query].present?
-      @items = Item.where("name LIKE ?", "%#{params[:query]}%")
-    else
-      @items = Item.all
+      sql_subquery = "name ILIKE :query OR category ILIKE :query"
+      @items = @items.where(sql_subquery, query: "%#{params[:query]}%")
     end
   end
 

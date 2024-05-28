@@ -1,8 +1,19 @@
-<div class="container mt-5">
+<div class="container mt-5 text-center">
   <h1>All Available items</h1>
   <hr>
   <div class="container mt5 text-center">
-  <%= link_to 'Add a item', new_item_path, class: 'btn btn-primary' %>
+    <div class="row justify-content-center">
+      <div class="col-sm-8 my-3">
+        <%= form_with url: items_path, method: :get, class: "d-flex" do %>
+          <%= text_field_tag :query,
+                params[:query],
+                class: "form-control",
+                placeholder: "Search item..."
+            %>
+          <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <hr>
 
