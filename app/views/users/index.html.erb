@@ -1,6 +1,6 @@
 <div class="container justify-content-center">
   <div class="row">
-    <div class="col-3 mt-1 ml-1 auctioned-items dashboard-card" style="height: 655px;">
+    <div class="col-3 mt-1 ml-2 auctioned-items dashboard-card" style="height: 655px;">
       <h1>Bids</h1>
       <ul>
         <% @users.each_with_index do |user, index| %>
@@ -11,25 +11,25 @@
     <div class="col-9">
       <div class="row">
         <div class="col-5 m-1 dashboard-card">
-          <div class="col-5 mt-1" style="height: 300px;">
+          <div class="col-5 m-1 justify-content-center" style="height: 300px;">
             <div class="chart" style="height: 100%;">
-              <canvas id="genderRatioChart"></canvas>
+              <canvas id="genderRatioChart" class=""></canvas>
             </div>
           </div>
         </div>
-        <div class="col-5 mt-1 dashboard-card">
-          <div class="col-5 m-1" style="height: 305px;">
+        <div class="col-5 m-1 dashboard-card">
+          <div class="col-5 m-1 justify-content-center" style="height: 305px;">
             <div class="chart" style="height: 100%;">
-              <canvas id="religiousCommunitiesChart"></canvas>
+              <canvas id="religiousCommunitiesChart" class=""></canvas>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-10 m-1 dashboard-card">
-          <div class="col-8" style="height: 260px;">
-            <div class="chart" style="height: 100%">
-              <canvas id="worldPopulationChart"></canvas>
+          <div id="line" class="col-8 justify-content-center" style="height: 255px;">
+            <div class="line-chart" style="height: 100%">
+              <canvas id="worldPopulationChart" class=""></canvas>
             </div>
           </div>
         </div>
