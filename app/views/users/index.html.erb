@@ -1,5 +1,121 @@
-<% @users.each do |user| %>
-  <p>
-    <%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %>
-  </p>
-<% end %>
+<div class="container justify-content-center">
+  <div class="row">
+    <div class="col-3 mt-1 ml-2 auctioned-items dashboard-card" style="height: 655px;">
+      <h1>Bids</h1>
+      <ul>
+        <% @users.each_with_index do |user, index| %>
+          <li><%= index + 1 %>: <%= user.first_name %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-5 m-1 dashboard-card">
+          <div class="col-5 m-1 justify-content-center" style="height: 300px;">
+            <div class="chart" style="height: 100%;">
+              <canvas id="genderRatioChart" class=""></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-5 m-1 dashboard-card">
+          <div class="col-5 m-1 justify-content-center" style="height: 305px;">
+            <div class="chart" style="height: 100%;">
+              <canvas id="religiousCommunitiesChart" class=""></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 m-1 dashboard-card">
+          <div id="line" class="col-8 justify-content-center" style="height: 255px;">
+            <div class="line-chart" style="height: 100%">
+              <canvas id="worldPopulationChart" class=""></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const genderRatioCtx = document.getElementById('genderRatioChart').getContext('2d');
+    const genderRatioChart = new Chart(genderRatioCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Male', 'Female'],
+        datasets: [{
+          data: [50, 50],
+          backgroundColor: ['#36A2EB', '#FF6384'],
+          hoverBackgroundColor: ['#36A2EB', '#FF6384']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'left',
+          },
+          title: {
+            display: true,
+            text: 'Gender Ratio'
+          }
+        }
+      }
+    });
+
+    const worldPopulationCtx = document.getElementById('worldPopulationChart').getContext('2d');
+    const worldPopulationChart = new Chart(worldPopulationCtx, {
+      type: 'line',
+      data: {
+        labels: ['2000', '2005', '2010', '2015', '2020'],
+        datasets: [{
+          label: 'Population',
+          data: [6, 6.5, 7, 7.5, 8],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'left',
+          },
+          title: {
+            display: true,
+            text: 'World Population Over Time'
+          }
+        }
+      }
+    });
+
+    const religiousCommunitiesCtx = document.getElementById('religiousCommunitiesChart').getContext('2d');
+    const religiousCommunitiesChart = new Chart(religiousCommunitiesCtx, {
+      type: 'polarArea',
+      data: {
+        labels: ['Christianity', 'Islam', 'Hinduism', 'Buddhism', 'Other'],
+        datasets: [{
+          data: [31.2, 24.1, 15.1, 6.9, 22.7],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9F40', '#4BC0C0'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9F40', '#4BC0C0']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'left',
+          },
+          title: {
+            display: true,
+            text: 'Religious Communities Worldwide'
+          }
+        }
+      }
+    });
+  });
+</script>

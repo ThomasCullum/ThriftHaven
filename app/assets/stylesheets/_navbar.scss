@@ -1,12 +1,16 @@
 @media (max-width: 991px) {
   .navbar-scroll {
-    background-color: #000000; /* Changed to black */
+    background-color: #fff; /* Changed to black */
   }
 
   .navbar-scroll .navbar-brand,
   .navbar-scroll .nav-link,
   .navbar-scroll .fa-bars {
     color: #494545 !important;
+  }
+
+  #intro {
+    height: 600px !important;
   }
 }
 
