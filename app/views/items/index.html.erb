@@ -88,7 +88,7 @@
                 class: "form-control",
                 placeholder: "Search item..."
             %>
-          <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+          <%= submit_tag "Search", name: "", class: "button-50" %>
         <% end %>
       </div>
     </div>
@@ -105,7 +105,7 @@
           <img class="item-img" src="https://www.corebase-clothing.com/cdn/shop/products/Premium-T-shirt-Black-1080-new-230223_79bfcb44-4682-4fc5-869d-2efc4f7fe20c.jpg?v=1677167966"/>
           <h5 class="card-title"><%= item.name %></h5>
           <p><small class="text-muted"><%= item.category %></small></p>
-          <%= link_to 'View Details', item_path(item), id: "link-#{item.id}", class: 'card-button' %>
+          <%= link_to 'purchase', item_path(item), id: "link-#{item.id}", class: 'button-50' %>
         </div>
       </div>
     </div>
