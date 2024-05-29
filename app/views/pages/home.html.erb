@@ -1,14 +1,14 @@
+<div class="banner">
 <div class="container text-center align-items-center">
   <main>
     <div class="container my-4 py-5"></div>
   </main>
 
-  <h1>ThriftHaven</h1>
-
+  <h1 class="title">ThriftHaven</h1>
   <main>
     <div class="container my-2 py-2"></div>
   </main>
-<div>
+  <div>
   <div class="row justify-content-center">
     <div class="col-sm-8 my-3">
       <%= form_with url: items_path, method: :get, class: "d-flex" do %>
@@ -17,9 +17,10 @@
               class: "form-control",
               placeholder: "Search item..."
           %>
-        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+
+        <%= submit_tag "Search", name: "", class: "button-50" %>
+
       <% end %>
     </div>
   </div>
-</div>
 </div>
