@@ -55,7 +55,7 @@
   <section>
     <div id="intro" class="bg-image" style="
         background-image: url('https://i.pinimg.com/564x/e6/e3/40/e6e340066c627f0e7cbee2dae68d0945.jpg');
-        height: 100vh;
+        height: 20vh;
       ">
       <div class="mask" style="background-color: rgba(0, 0, 0, 0.2);">
         <div class="container d-flex justify-content-center align-items-center h-100">
@@ -102,7 +102,9 @@
     <div class="col-md-4">
       <div class="card" onclick="document.getElementById('link-<%= item.id %>').click()">
         <div class="card-description">
-          <img class="item-img" src="https://www.corebase-clothing.com/cdn/shop/products/Premium-T-shirt-Black-1080-new-230223_79bfcb44-4682-4fc5-869d-2efc4f7fe20c.jpg?v=1677167966"/>
+          <% if @item.photo.attached? %>
+          <%= cl_image_tag @item.photo.key, height: 300, width: 400, crop: :fill %>
+        <% end %>
           <h5 class="card-title"><%= item.name %></h5>
           <p><small class="text-muted"><%= item.category %></small></p>
           <%= link_to 'purchase', item_path(item), id: "link-#{item.id}", class: 'button-50' %>

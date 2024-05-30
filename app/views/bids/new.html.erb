@@ -1,0 +1,6 @@
+<h1>Place a Bid</h1>
+
+<%= simple_form_for [@item, @bid] do |form| %>
+  <%= form.input :amount, label: "Bid Amount", input_html: { step: 0.01 } %>
+  <%= form.button :submit, "Place Bid" %>
+<% end %>

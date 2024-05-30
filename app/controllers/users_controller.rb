@@ -6,7 +6,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
+    @cart = @user.cart
+  end
+
+  def remove_from_cart
+    @user = current_user
+    @item = Item.find(params[:item_id])
+    @user.cart.items.delete(@item)
+    redirect_to @item, notice: 'Item removed from cart successfully.'
   end
 
   private

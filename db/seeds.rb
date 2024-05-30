@@ -8,31 +8,45 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-require 'faker'
-p "deleting previous nonsense"
-Item.delete_all
-p "adding new things"
+User.destroy_all
+Item.destroy_all
+Bid.destroy_all
+Cart.destroy_all
 
-10.times do
-  User.create(
-    first_name: Faker::ProgrammingLanguage.name,
-    last_name: Faker::ProgrammingLanguage.name ,
-    address: Faker::Address.full_address,
-    email: "#{Faker::Vehicle.manufacture}@gmail.com",
-    password: Faker::ProgrammingLanguage.name
+users = []
+5.times do |i|
+  users << User.create!(
+    email: "user#{i}@example.com",
+    password: 'password',
+    password_confirmation: 'password',
+    first_name: "User#{i}",
+    last_name: "LastName#{i}",
+    address: "Address#{i}"
   )
-  p "user added"
 end
 
-20.times do
-  Item.create(
-    name: Faker::Vehicle.manufacture,
-    category: ['Top', 'Bottom', 'Shoes', 'Accessories'].sample,
-    description: Faker::TvShows::BigBangTheory.quote,
-    rating: [1,2,3,4,5].sample,
-    user_id: [1,2,3,4,5,6,7,8,9,10].sample
+items = []
+5.times do |i|
+  items << Item.create!(
+    name: "Item #{i}",
+    category: "Category #{i}",
+    description: "Description for item #{i}",
+    price: (i+1) * 10,
+    user: users.sample,
+    rating: rand(0..10),
+    sale_type: 0
   )
-  p "item added"
 end
 
-p "done"
+users.each do |user|
+  2.times do
+    Bid.create!(
+      user: user,
+      item: items.sample,
+      amount: rand(10..100),
+      status: 0
+    )
+  end
+end
+
+puts "Seeding completed!"

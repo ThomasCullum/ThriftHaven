@@ -1,41 +1,62 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-scroll">
-    <div class="container-fluid">
-      <%= link_to "ThriftHaven", root_path, class: "navbar-brand" %>
-      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <%= link_to "Home", root_path, class: "nav-link active" %>
-          </li>
+<nav class="navbar navbar-expand-lg fixed-top navbar-scroll bg-light">
+  <div class="container-fluid">
+    <%= link_to "ThriftHaven", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <%= link_to "Home", root_path, class: "nav-link active" %>
+        </li>
+        <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Dashboard", users_path, class: "nav-link" %>
           </li>
-        </ul>
-        <ul class="navbar-nav d-flex flex-row">
+        <% end %>
+      </ul>
+      <ul class="navbar-nav d-flex flex-row">
+        <li class="nav-item me-3 me-lg-0">
+          <%= link_to items_path, class: "nav-link" do %>
+            <i class="fa-solid fa-shirt"></i>
+          <% end %>
+        </li>
+        <% if user_signed_in? %>
           <li class="nav-item me-3 me-lg-0">
-            <a class="nav-link" href="#!">
-              <i class="fas fa-shopping-cart"></i>
-            </a>
+            <% if current_user.cart %>
+              <%= link_to cart_path(current_user.cart), class: "nav-link" do %>
+                <i class="fas fa-shopping-cart"></i>
+              <% end %>
+            <% else %>
+              <%= link_to '#', class: "nav-link disabled" do %>
+                <i class="fas fa-shopping-cart"></i>
+              <% end %>
+            <% end %>
           </li>
           <li class="nav-item me-3 me-lg-0">
-            <a class="nav-link" href="#!">
-              <i class="fab fa-twitter"></i>
-            </a>
+            <%= link_to user_path(current_user), class: "nav-link" do %>
+              <i class="fa-solid fa-user"></i>
+            <% end %>
           </li>
           <li class="nav-item me-3 me-lg-0">
-            <a class="nav-link" href="#!">
-              <i class="fab fa-instagram"></i>
-            </a>
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
+              <i class="fas fa-sign-out-alt"></i>
+            <% end %>
           </li>
-        </ul>
-      </div>
+        <% else %>
+          <li class="nav-item me-3 me-lg-0">
+            <%= link_to new_user_session_path, class: "nav-link" do %>
+              <i class="fas fa-sign-in-alt"></i>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
- <main>
-   <div class="container my-3 py-3"></div>
+<main>
+  <div class="container my-3 py-3"></div>
 </main>

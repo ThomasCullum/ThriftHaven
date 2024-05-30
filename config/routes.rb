@@ -1,20 +1,38 @@
 Rails.application.routes.draw do
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # FIRST ROUTE
   root to: "pages#home"
 
-  # ADDITIONAL ROUTES
-  resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :bids, only: [:new, :create]
+  resources :carts do
+    delete 'item/:id', to: 'carts#remove_item', as: 'remove_cart_item'
   end
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  resources :carts, only: [:show] do
+    post 'add_item/:item_id', action: :add_item, on: :member, as: :add_item
+    delete 'remove_item/:item_id', action: :remove_item, on: :member, as: :remove_item
+    delete 'clear_cart', action: :clear_cart, on: :member, as: :clear_cart
+  end
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    member do
+      get 'add_to_cart'
+      post 'add_to_cart'
+      delete 'remove_from_cart'
+    end
+    resources :bids, only: [:new, :create] do
+      patch 'approve', on: :member
+      patch 'decline', on: :member
+    end
+  end
+
+  resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    # post 'add_to_cart', on: :member
+    delete 'remove_from_cart', on: :member
+  end
+
+  resources :cart_items, only: [:create, :update, :destroy]
+
+  post 'checkout', to: 'items#checkout'
+
+  get "up" => "rails/health#show", as: :rails_health_check
 end

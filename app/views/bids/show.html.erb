@@ -1,0 +1,3 @@
+<% if @item.for_auction? %>
+  <%= link_to 'Place a Bid', new_item_bid_path(@item) %>
+<% end %>
