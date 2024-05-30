@@ -1,3 +1,29 @@
-<h1><%= @user.first_name %> <%= @user.last_name %></h1>
-<p>Email: <%= @user.email %></p>
-<p>Address: <%= @user.address %></p>
+<main class="container my-2 py-2">
+  <div class="row">
+    <div class="col-md-5 m-1">
+      <div class="container">
+        <div class="user-profile">
+          <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+          <p>Email: <%= @user.email %></p>
+          <p>Address: <%= @user.address %></p>
+
+          <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary" %>
+        </div>
+          <main class="container my-2 py-2"></main>
+          <%= link_to "Add Item", new_item_path, class: "btn btn-success" %>
+          <%= link_to "Back to Home Page", root_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+
+    <div class="col-md-5 m-1">
+      <div class="container">
+        <h2>My Listings</h2>
+        <% @user.items.each do |item| %>
+          <div class="item-listing">
+            <p><%= link_to item.name, edit_item_path(item) %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

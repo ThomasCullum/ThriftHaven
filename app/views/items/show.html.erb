@@ -1,22 +1,66 @@
 <div class="container mt-5">
-
-  <div class="card_show">
-  <h1 class="card_title"><%= @item.name %></h1>
-  <div class="card_content d-flex ml-10">
-  <div>
-    <p><%= @item.description %></p>
-    <p><strong>Category:</strong> <%= @item.category %></p>
-    <p><strong>Rating:</strong> <%= @item.rating %></p>
-  </div>
-    <div class="card__content img">
-  <img class="fit-picture" src="https://www.corebase-clothing.com/cdn/shop/products/Premium-T-shirt-Black-1080-new-230223_79bfcb44-4682-4fc5-869d-2efc4f7fe20c.jpg?v=1677167966"/>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card_show">
+        <div class="card_content d-flex">
+          <div class="card_text">
+            <h1 class="card_title"><%= @item.name %></h1>
+            <p><%= @item.description %></p>
+            <p><strong>Category:</strong> <%= @item.category %></p>
+            <p><strong>Rating:</strong> <%= @item.rating %></p>
+            <p><strong>Sale Type:</strong> <%= @item.for_sale? ? 'For Sale' : 'For Auction' %></p>
+            <p><strong>Price:</strong> R<%= @item.price %></p>
+            <div class="card_footer button-hover">
+              <% if @item.for_sale? %>
+                <%= link_to 'Add to cart', add_to_cart_item_path(@item), method: :post, class: 'button-50' %>
+              <% else %>
+                <% if @item.for_auction? %>
+                  <%= simple_form_for [@item, @item.bids.build] do |form| %>
+                    <%= form.input :amount, label: "Bid Amount", input_html: { step: 0.01 } %>
+                    <%= form.button :submit, "Place Bid", class: 'button-50' %>
+                  <% end %>
+                <% else %>
+                  <p>No bid form available.</p>
+                <% end %>
+              <% end %>
+              <%= link_to 'Back to items', items_path, class: 'button-50' %>
+            </div>
+          </div>
+          <div class="card__content img">
+            <% if @item.photo.attached? %>
+              <%= cl_image_tag @item.photo.key, height: 300, width: 400, crop: :fill %>
+            <% else %>
+              <p>No image available</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card__footer">
-    <div class="card_footer .button:hover">
-  <%= link_to 'Add to cart', items_path, class: 'button-50' %>
-  <%= link_to 'Back to items', items_path, class: 'button-50' %>
-
+    <div class="col-md-4">
+      <div class="card_show">
+        <div class="bids_container">
+          <% if @item.for_auction? %>
+            <div class="justify-content-center">
+              <h2>Highest Bids</h2>
+              <ul>
+                <% @item.top_bids.each do |bid| %>
+                  <li>
+                    <%= bid.user.email %>: R<%= bid.amount %>
+                    <br>
+                    <% if @item.user == current_user && bid.pending? %>
+                      <div class="row"></div>
+                        <%= link_to 'Approve', items_path(@item, bid), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-success sm' %>
+                        <%= link_to 'Decline', item_path(@item, bid), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger sm' %>
+                      </div>
+                    <% else %>
+                      <%= bid.status.capitalize %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
