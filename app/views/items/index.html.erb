@@ -102,8 +102,8 @@
     <div class="col-md-4">
       <div class="card" onclick="document.getElementById('link-<%= item.id %>').click()">
         <div class="card-description">
-          <% if @item.photo.attached? %>
-          <%= cl_image_tag @item.photo.key, height: 300, width: 400, crop: :fill %>
+          <% if item.photo.attached? %>
+          <%= cl_image_tag item.photo.key, width: 250, crop: :fill %>
         <% end %>
           <h5 class="card-title"><%= item.name %></h5>
           <p><small class="text-muted"><%= item.category %></small></p>
