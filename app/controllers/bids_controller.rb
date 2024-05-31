@@ -22,7 +22,13 @@ class BidsController < ApplicationController
     @item = Item.find(params[:item_id])
     @bid = Bid.find(params[:id])
     @bid.update(status: 'approved')
+
     @item.bids.where.not(id: @bid.id).update_all(status: 'declined')
+
+    @item.bids.where.not(id: @bid.id).destroy_all
+
+    @item.destroy
+    
     redirect_to root_path, notice: 'Bid approved successfully.'
   end
 

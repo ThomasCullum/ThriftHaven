@@ -10,12 +10,19 @@ class ItemsController < ApplicationController
 
   def accept_bid
     @item = Item.find(params[:id])
-    @bid = @item.bids.find(params[:bid_id])
+    @bid = @item.bids.find(params[:id])
 
-    if @bid.update(status: 'accepted')
+
+    if @bid.update(status: 'approved')
       @item.update(sold: true, user_id: @bid.user_id)
 
-      flash[:notice] = "Bid accepted. Notification sent to #{bid.user.first_name}."
+      @item.bids.where.not(id: @bid.id).update_all(status: 'declined')
+
+      @item.bids.where.not(id: @bid.id).destroy_all
+
+      @item.destroy
+
+      flash[:notice] = "Bid accepted. Notification sent to #{@bid.user.first_name}."
 
       redirect_to items_path
     else

@@ -16,8 +16,8 @@ Rails.application.routes.draw do
       get 'add_to_cart'
       post 'add_to_cart'
       delete 'remove_from_cart'
-      patch :accept_bid
-      patch :decline_bid
+      get :accept_bid
+      get :decline_bid
     end
     resources :bids, only: [:new, :create] do
       patch 'approve', on: :member
