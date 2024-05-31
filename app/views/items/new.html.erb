@@ -5,26 +5,37 @@
     <div>
       <%= form.input :name %>
     </div>
+     <br>
     <div>
       <%= form.input :description %>
     </div>
+     <br>
     <div>
-      <%= form.input :category %>
+      <p>category</p>
+       <%= form.select :category, ["T-SHIRT", "PANTS", "ACCESSORY", "SHOES", "SHORTS", "JERSEY", "HOODIE", "JACKET"] %>
     </div>
+     <br>
     <div>
-      <%= form.input :rating %>
+      <p>quality rating</p>
+       <%= form.select :rating, [1, 2, 3, 4, 5] %>
     </div>
+    <br>
     <div>
+    <br>
+      <p>Sale Type</p>
       <%= form.select :sale_type, Item.sale_types.keys.map { |w| [w.humanize, w] } %>
     </div>
+     <br>
     <div>
       <%= form.input :price %>
     </div>
+     <br>
     <div>
       <%= form.input :photo, as: :file %>
     </div>
+     <br>
     <div>
-      <%= form.submit %>
+      <%= form.submit class: "button-50" %>
     </div>
   <% end %>
 

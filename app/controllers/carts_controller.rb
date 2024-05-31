@@ -11,8 +11,9 @@ class CartsController < ApplicationController
     redirect_to @item, notice: 'Item added to cart successfully.'
   end
 
-  def remove_item
-    @cart = current_user.cart
+  def destroy
+    @cart = current_user.cart.items.clear
+    
     if @cart
       @cart.destroy
       flash[:notice] = 'Cart was successfully cleared.'
