@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   has_and_belongs_to_many :carts
   belongs_to :user
   has_one_attached :photo
+  has_many :users, through: :bids
 
   enum sale_type: { for_sale: 0, for_auction: 1 }
 

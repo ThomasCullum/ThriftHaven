@@ -8,11 +8,34 @@ class ItemsController < ApplicationController
     @bid = Bid.new if @item.for_auction?
   end
 
-  # def add_to_cart
-  #   @item = Item.find(params[:id])
-  #   current_user.cart.add_item(@item)
-  #   redirect_to cart_path, notice: 'Item added to cart successfully.'
-  # end
+  def accept_bid
+    @item = Item.find(params[:id])
+    @bid = @item.bids.find(params[:bid_id])
+
+    if @bid.update(status: 'accepted')
+      @item.update(sold: true, user_id: @bid.user_id)
+
+      flash[:notice] = "Bid accepted. Notification sent to #{bid.user.first_name}."
+
+      redirect_to items_path
+    else
+      flash[:alert] = "Failed to accept bid."
+      redirect_to items_path
+    end
+  end
+
+  def decline_bid
+    @item = Item.find(params[:id])
+    @bid = @item.bids.find(params[:bid_id])
+
+    if @bid.update(status: 'declined')
+      flash[:notice] = "Bid declined."
+      redirect_to items_path
+    else
+      flash[:alert] = "Failed to decline bid."
+      redirect_to items_path
+    end
+  end
 
   def add_to_cart
     @user = current_user
@@ -66,6 +89,11 @@ class ItemsController < ApplicationController
     if params[:query].present?
       sql_subquery = "name ILIKE :query OR category ILIKE :query"
       @items = @items.where(sql_subquery, query: "%#{params[:query]}%")
+    end
+    @users = User.joins(:bids).distinct
+
+    @earnings_over_time = Item.group_by_month(:created_at, format: "%b").sum(:price).map do |month, earnings|
+      { month: month, earnings: earnings }
     end
   end
 

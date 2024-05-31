@@ -3,21 +3,21 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
 
-  resources :carts do
-    delete 'item/:id', to: 'carts#remove_item', as: 'remove_cart_item'
+  resources :carts, only: [:index, :show, :create, :update, :destroy] do
+    member do
+      post 'add_item/:item_id', to: 'carts#add_item', as: 'add_item'
+      delete 'remove_item/:item_id', to: 'carts#remove_item', as: 'remove_item'
+      delete 'clear', to: 'carts#clear_cart', as: 'clear'
+    end
   end
 
-  resources :carts, only: [:show] do
-    post 'add_item/:item_id', action: :add_item, on: :member, as: :add_item
-    delete 'remove_item/:item_id', action: :remove_item, on: :member, as: :remove_item
-    delete 'clear_cart', action: :clear_cart, on: :member, as: :clear_cart
-  end
-
-  resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  resources :items do
     member do
       get 'add_to_cart'
       post 'add_to_cart'
       delete 'remove_from_cart'
+      patch :accept_bid
+      patch :decline_bid
     end
     resources :bids, only: [:new, :create] do
       patch 'approve', on: :member
@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    # post 'add_to_cart', on: :member
     delete 'remove_from_cart', on: :member
   end
 

@@ -1,24 +1,39 @@
-<div class="container justify-content-center">
+<main class="container my-2 py-2">
   <div class="row">
-    <div class="col-3 mt-1 ml-2 auctioned-items dashboard-card" style="height: 655px;">
+    <div class="col-12 mt-1 ml-2 auctioned-items dashboard-card" style="height: 655px;">
       <h1>Bids</h1>
-      <ul>
-        <% @users.each_with_index do |user, index| %>
-          <li><%= index + 1 %>: <%= user.first_name %></li>
-        <% end %>
-      </ul>
+      <% if @items.any? %>
+        <ul class="list-group">
+          <% @items.each do |item| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <%= item.name %>
+              <span class="badge bg-danger rounded-pill">
+                <% item.bids.each do |bid| %>
+                  <div>
+                    <%= bid.user.first_name %> <%= "\t" %>
+                    <%= link_to "Accept", accept_bid_item_path(item, bid_id: bid.id), method: :patch, class: "btn btn-sm btn-success me-1" %>
+                    <%= link_to "Decline", decline_bid_item_path(item, bid_id: bid.id), method: :patch, class: "btn btn-sm btn-danger" %>
+                  </div>
+                <% end %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>No items with bids found.</p>
+      <% end %>
     </div>
-    <div class="col-9">
+    <div class="col-12">
       <div class="row">
-        <div class="col-5 m-1 dashboard-card">
-          <div class="col-5 m-1 justify-content-center" style="height: 300px;">
+        <div class="col-5 m-1 dashboard-card justify-content-center">
+          <div class="col-12 m-1 justify-content-center" style="height: 300px;">
             <div class="chart" style="height: 100%;">
               <canvas id="Overview" class=""></canvas>
             </div>
           </div>
         </div>
-        <div class="col-5 m-1 dashboard-card">
-          <div class="col-5 m-1 justify-content-center" style="height: 305px;">
+        <div class="col-5 m-1 dashboard-card justify-content-center">
+          <div class="col-12 m-1 justify-content-center" style="height: 305px;">
             <div class="chart" style="height: 100%;">
               <canvas id="religiousCommunitiesChart" class=""></canvas>
             </div>
@@ -26,8 +41,8 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-10 m-1 dashboard-card">
-          <div id="line" class="col-8 justify-content-center" style="height: 255px;">
+        <div class="col-9 m-1 dashboard-card">
+          <div id="line" class="col-9 justify-content-center" style="height: 255px;">
             <div class="line-chart" style="height: 100%">
               <canvas id="earningsChart" class=""></canvas>
             </div>
@@ -36,8 +51,7 @@
       </div>
     </div>
   </div>
-</div>
-
+</main>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -47,7 +61,7 @@
       data: {
         labels: ['Sold', 'Bought', 'Views'],
         datasets: [{
-          data: [7, 2, 17],
+          data: [<%= @sold_items.count %>, 2, 17], // Adjust 'Bought' and 'Views' as necessary
           backgroundColor: ['#36A2EB', '#FF6384', '#F0ECA2'],
           hoverBackgroundColor: ['#36A2EB', '#FF6384', '#F0ECA2']
         }]
@@ -70,10 +84,10 @@
     const earningsChart = new Chart(earningsCtx, {
       type: 'line',
       data: {
-        labels: ['Apr', 'May', 'June', 'July', 'Aug'],
+        labels: <%= @earnings_over_time.map { |e| e[:month] }.to_json.html_safe %>,
         datasets: [{
           label: 'Earnings',
-          data: [600, 120, 730, 900, 1800],
+          data: <%= @earnings_over_time.map { |e| e[:earnings] }.to_json.html_safe %>,
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1

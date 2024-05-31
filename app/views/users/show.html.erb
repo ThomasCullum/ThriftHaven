@@ -9,19 +9,28 @@
 
           <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary" %>
         </div>
-          <main class="container my-2 py-2"></main>
-          <%= link_to "Add Item", new_item_path, class: "btn btn-success" %>
-          <%= link_to "Back to Home Page", root_path, class: "btn btn-secondary" %>
+        <%= link_to "Add Item", new_item_path, class: "btn btn-success" %>
+        <%= link_to "Back to Home Page", root_path, class: "btn btn-secondary" %>
       </div>
     </div>
 
     <div class="col-md-5 m-1">
       <div class="container">
-        <h2>My Listings</h2>
-        <% @user.items.each do |item| %>
-          <div class="item-listing">
-            <p><%= link_to item.name, edit_item_path(item) %></p>
-          </div>
+        <h1>Bids</h1>
+        <% if @item && @item.bids.any? %>
+          <ul class="list-group">
+            <% @item.bids.each do |bid| %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= bid.user.first_name %>
+                <span class="badge bg-danger rounded-pill">
+                  <%= link_to "Accept", accept_bid_item_path(@item, bid), method: :patch, class: "btn btn-sm btn-success me-1" %>
+                  <%= link_to "Decline", decline_bid_item_path(@item, bid), method: :patch, class: "btn btn-sm btn-danger" %>
+                </span>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No bids available for this item.</p>
         <% end %>
       </div>
     </div>

@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 ruby "3.1.2"
 
+# DATE GEM
+gem 'groupdate'
+
 # CLOUDINARY
 gem "cloudinary"
 
