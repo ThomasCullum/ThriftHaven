@@ -1,93 +1,25 @@
-<main class="container my-5 py-2">
-  <div class="row">
-    <div class="bid_card">
-      <h1>Bids Placed</h1>
-      <% if @items.any? %>
-        <ul class="list-group">
-          <% @items.each do |item| %>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <%= item.name %>
-              <span class="badge rounded-pill">
-                <% item.bids.each do |bid| %>
-                  <div>
-                    <%= bid.user.first_name %> <%= "\t" %>
-                    <%= link_to "Accept", accept_bid_item_path(item, bid_id: bid.id), method: :patch, class: "btn btn-sm btn-success me-1" %>
-                    <%= link_to "Decline", decline_bid_item_path(item, bid_id: bid.id), method: :patch, class: "btn btn-sm btn-danger" %>
-                  </div>
-                <% end %>
-              </span>
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        <p>No items with bids found.</p>
-      <% end %>
-    </div>
-    <div class="bid_card">
-      <h1>My Bids</h1>
-      <% if @items.any? %>
-        <ul class="list-group">
-          <% @items.each do |item| %>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <%= item.name %>
-              <span class="badge bg-danger rounded-pill">
-                <% item.bids.each do |bid| %>
-                  <div>
-                    <%= bid.user.first_name %> <%= "\t" %>
-                    <%= link_to "Accept", accept_bid_item_path(item, bid_id: bid.id), method: :patch, class: "btn btn-sm btn-success me-1" %>
-                    <%= link_to "Decline", decline_bid_item_path(item, bid_id: bid.id), method: :patch, class: "btn btn-sm btn-danger" %>
-                  </div>
-                <% end %>
-              </span>
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        <p>No items with bids found.</p>
-      <% end %>
-    </div>
-    <div class="col-12">
-      <div class="row">
-        <div class="col-9 m-1 dashboard-card">
-          <div id="line" class="col-9 justify-content-center" style="height: 255px;">
-            <div class="line-chart" style="height: 100%">
-              <canvas id="earningsChart" class=""></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
+    <div class="bid_card">
+    <h1>My Bids</h1>
+    <% if @items.any? %>
+        <ul class="list-group">
+            <% @items.each do |item| %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <%= item.name %>
+                    <span class="badge">
+                        <% item.bids.each do |bid| %>
+                            <div class="bid-actions">
+                                <span><%= bid.user.first_name %></span>
+                                <%= link_to "Accept", accept_bid_item_path(item, bid_id: bid.id), method: :patch, class: "button-50 accept" %>
+                                <%= link_to "Decline", decline_bid_item_path(item, bid_id: bid.id), method: :patch, class: "button-50 decline" %>
+                            </div>
+                        <% end %>
+                    </span>
+                </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <p>No items with bids found.</p>
+    <% end %>
+</div>
 
-    const earningsCtx = document.getElementById('earningsChart').getContext('2d');
-    const earningsChart = new Chart(earningsCtx, {
-      type: 'line',
-      data: {
-        labels: <%= @earnings_over_time.map { |e| e[:month] }.to_json.html_safe %>,
-        datasets: [{
-          label: 'Earnings',
-          data: <%= @earnings_over_time.map { |e| e[:earnings] }.to_json.html_safe %>,
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          borderColor: 'rgba(75, 192, 192, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'left',
-          },
-          title: {
-            display: true,
-            text: 'Earnings Over Time'
-          }
-        }
-      }
-    });
-  });
-</script>
