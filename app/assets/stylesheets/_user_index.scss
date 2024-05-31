@@ -1,28 +1,106 @@
 .bid_card {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  padding-top: 10px;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 2px;
+  padding: 20px;
   border-radius: 8px;
-  margin-right: 2px;
-  margin-top: 1px;
-  margin-left: 2px;
-  height: 655px;
-  width: 500px;
+  height: auto;
+  width: 100%;
+  max-width: 1000px;
   background-color: rgb(206, 200, 200);
-  border-style: solid;
-  border-color: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.2);
-  }
+}
 
-  .badge {
-    background-color: red;
-    border-radius: 50px;
-    padding: 5px 10px;
-    color: white;
-  }
-  .rounded-pill {
-    border-radius: 50px;
-  }
+.bid_card h1 {
+  margin-bottom: 20px;
+}
+
+.list-group {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.badge {
+  border-radius: 12px;
+  padding: 5px 10px;
+  color: white;
+  background-color: #000000; /* Adjust badge color as needed */
+}
+
+.bid-actions {
+  display: flex;
+  align-items: center;
+}
+
+.bid-actions span {
+  margin-right: 10px;
+}
+
+.button-50 {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.button-50.accept {
+  background-color: #28a745; /* Green for accept */
+}
+
+.button-50.decline {
+  background-color: #dc3545; /* Red for decline */
+}
+
+.button-50:hover {
+  opacity: 0.8;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #555;
+}
+
+.dashboard-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+.line-chart {
+  height: 255px; /* Fixed height for the chart */
+}
+
+.line-chart canvas {
+  width: 100%;
+  height: 100%;
+}
 

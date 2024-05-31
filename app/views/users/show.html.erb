@@ -22,9 +22,9 @@
             <% @item.bids.each do |bid| %>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <%= bid.user.first_name %>
-                <span class="badge bg-danger rounded-pill">
-                  <%= link_to "Accept", accept_bid_item_path(@item, bid), method: :patch, class: "btn btn-sm btn-success me-1" %>
-                  <%= link_to "Decline", decline_bid_item_path(@item, bid), method: :patch, class: "btn btn-sm btn-danger" %>
+                <span class="badge">
+                  <%= link_to "Accept", accept_bid_item_path(@item, bid), method: :patch, class: "button-50" %>
+                  <%= link_to "Decline", decline_bid_item_path(@item, bid), method: :patch, class: "button-50" %>
                 </span>
               </li>
             <% end %>
