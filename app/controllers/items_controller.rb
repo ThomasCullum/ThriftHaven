@@ -102,12 +102,17 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = current_user.items.new(item_params)
+    # @item = current_user.items.new(item_params)
+    @item = Item.new(item_params)
+    @item.user = current_user
     if @item.save
       redirect_to @item, notice: 'Item was successfully created.'
     else
       render :new
     end
+
+
+
   end
 
   def edit
@@ -134,7 +139,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :description, :rating, :category, :sale_type, :photo)
+    params.require(:item).permit(:name, :description, :rating, :category, :price, :sale_type, :photo)
   end
 
   def bid_params
