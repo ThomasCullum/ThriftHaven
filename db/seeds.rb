@@ -8,10 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.destroy_all
-Item.destroy_all
 Bid.destroy_all
 Cart.destroy_all
+Item.destroy_all
+User.destroy_all
 
 users = []
 5.times do |i|
