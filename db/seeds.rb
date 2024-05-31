@@ -13,17 +13,16 @@ Cart.destroy_all
 Item.destroy_all
 User.destroy_all
 
-users = []
-5.times do |i|
-  users << User.create!(
-    email: "user#{i}@example.com",
-    password: 'password',
-    password_confirmation: 'password',
-    first_name: "User#{i}",
-    last_name: "LastName#{i}",
-    address: "Address#{i}"
-  )
-end
+
+users << User.create!(
+  email: "ypmzolisa@gmail.com",
+  password: 'password',
+  password_confirmation: 'password',
+  first_name: "Prince",
+  last_name: "Mzolisa",
+  address: "21 Jump Street"
+)
+
 
 items = []
 5.times do |i|
