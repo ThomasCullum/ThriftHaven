@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
 
   def accept_bid
     @item = Item.find(params[:id])
-    @bid = @item.bids.find(params[:id])
+    @bid = @item.bids.find(params[:bid_id])
 
 
     if @bid.update(status: 'approved')

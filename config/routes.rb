@@ -27,6 +27,14 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     delete 'remove_from_cart', on: :member
+    member do
+      get :accept_bid
+      get :decline_bid
+    end
+    resources :bids, only: [:new, :create] do
+      patch 'approve', on: :member
+      patch 'decline', on: :member
+    end
   end
 
   resources :cart_items, only: [:create, :update, :destroy]

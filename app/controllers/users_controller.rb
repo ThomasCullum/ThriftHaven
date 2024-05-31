@@ -24,6 +24,42 @@ class UsersController < ApplicationController
     @items= Item.joins(:bids).distinct
   end
 
+  def accept_bid
+    @item = Item.find(params[:id])
+    @bid = @item.bids.find(params[:bid_id])
+
+
+    if @bid.update(status: 'approved')
+      @item.update(sold: true, user_id: @bid.user_id)
+
+      @item.bids.where.not(id: @bid.id).update_all(status: 'declined')
+
+      @item.bids.where.not(id: @bid.id).destroy_all
+
+      @item.destroy
+
+      flash[:notice] = "Bid accepted. Notification sent to #{@bid.user.first_name}."
+
+      redirect_to items_path
+    else
+      flash[:alert] = "Failed to accept bid."
+      redirect_to items_path
+    end
+  end
+
+  def decline_bid
+    @item = Item.find(params[:id])
+    @bid = @item.bids.find(params[:bid_id])
+
+    if @bid.update(status: 'declined')
+      flash[:notice] = "Bid declined."
+      redirect_to items_path
+    else
+      flash[:alert] = "Failed to decline bid."
+      redirect_to items_path
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     @cart = @user.cart
