@@ -7,7 +7,7 @@ class Item < ApplicationRecord
 
   enum sale_type: { for_sale: 0, for_auction: 1 }
 
-  validates :name, :category, :description, :rating, :photo, presence: true
+  validates :name, :category, :description, :rating, presence: true
   validates :rating, numericality: { only_integer: true }
   validates :sale_type, presence: true
 
