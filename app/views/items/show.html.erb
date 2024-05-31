@@ -52,8 +52,8 @@
                     <br>
                     <% if @item.user == current_user && bid.pending? %>
                       <div class="row">
-                        <%= link_to 'Approve', items_path(@item, bid), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-success sm' %>
-                        <%= link_to 'Decline', item_path(@item, bid), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-danger sm' %>
+                        <%= link_to 'Approve', items_path(@item, bid), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'button-50' %>
+                        <%= link_to 'Decline', item_path(@item, bid), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'button-50' %>
                       </div>
                     <% else %>
                       <%= bid.status.capitalize %>
