@@ -54,7 +54,7 @@
           <h5 class="card-title"><%= item.name %></h5>
           <p> R<%= item.price %></p>
           <p><small class="text-muted"><%= item.category %></small></p>
-          <% if  item.sale_type == 1 %>
+          <% if item.sale_type == "for_sale" %>
           <%= link_to 'purchase', item_path(item), id: "link-#{item.id}", class: 'button-50' %>
           <% else %>
           <%= link_to 'bid', item_path(item), id: "link-#{item.id}", class: 'button-50' %>

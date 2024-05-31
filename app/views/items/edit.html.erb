@@ -1,4 +1,4 @@
-<main class="container my-2 py-2"></main>
+<main class="container my-2 py-2">
 <h1><%= action_name.capitalize %> Item</h1>
 <%= form_with(model: @item, local: true) do |form| %>
   <% if @item.errors.any? %>
@@ -16,29 +16,37 @@
     <%= form.label :name %><br>
     <%= form.text_field :name %>
   </div>
+  <br>
   <div>
     <%= form.label :description %><br>
-    <%= form.text_area :description %>
+    <%= form.text_field :description %>
   </div>
+  <br>
   <div>
     <%= form.label :category %><br>
-    <%= form.text_field :category %>
+    <%= form.select :category, ["T-SHIRT", "PANTS", "ACCESSORY", "SHOES", "SHORTS", "JERSEY", "HOODIE", "JACKET"] %>
   </div>
+  <br>
   <div>
     <%= form.label :rating %><br>
-    <%= form.number_field :rating %>
+    <%= form.select :rating, [1, 2, 3, 4, 5] %>
   </div>
+  <br>
   <div>
     <%= form.label :sale_type %><br>
     <%= form.select :sale_type, Item.sale_types.keys.map { |w| [w.humanize, w] } %>
   </div>
+  <br>
   <div>
     <%= form.label :price %><br>
     <%= form.number_field :price %>
   </div>
+  <br>
   <div>
     <%= form.submit %>
   </div>
+  <br>
 <% end %>
 
-<%= link_to 'Back', items_path %>
+<%= link_to 'Back', items_path, class: "button-50"%>
+</main>
