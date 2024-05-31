@@ -13,7 +13,7 @@ Cart.destroy_all
 Item.destroy_all
 User.destroy_all
 
-
+users = []
 users << User.create!(
   email: "ypmzolisa@gmail.com",
   password: 'password',
