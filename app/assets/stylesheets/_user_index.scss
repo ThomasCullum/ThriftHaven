@@ -2,14 +2,27 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  padding: 20px;
+  margin-top: 20px;
+  padding-top: 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-right: 2px;
   margin-top: 1px;
   margin-left: 2px;
   height: 655px;
-  background-color: grey;
+  width: 500px;
+  background-color: rgb(206, 200, 200);
   border-style: solid;
-  border-color: red;
+  border-color: rgb(0, 0, 0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 20px rgba(0, 0, 0, 0.2);
   }
+
+  .badge {
+    background-color: red;
+    border-radius: 50px;
+    padding: 5px 10px;
+    color: white;
+  }
+  .rounded-pill {
+    border-radius: 50px;
+  }
+
