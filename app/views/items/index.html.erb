@@ -49,11 +49,16 @@
       <div class="card" onclick="document.getElementById('link-<%= item.id %>').click()">
         <div class="card-description">
           <% if item.photo.attached? %>
-          <%= cl_image_tag item.photo.key, width: 250, crop: :fill %>
+          <%= cl_image_tag item.photo.key, width: 250, height: 200, crop: :fill %>
         <% end %>
           <h5 class="card-title"><%= item.name %></h5>
+          <p> R<%= item.price %></p>
           <p><small class="text-muted"><%= item.category %></small></p>
+          <% if  item.sale_type == 1 %>
           <%= link_to 'purchase', item_path(item), id: "link-#{item.id}", class: 'button-50' %>
+          <% else %>
+          <%= link_to 'bid', item_path(item), id: "link-#{item.id}", class: 'button-50' %>
+          <% end %>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+<div>
 <% if @item.for_auction? %>
-  <%= link_to 'Place a Bid', new_item_bid_path(@item) %>
+  <%= link_to 'Place a Bid', new_item_bid_path(@item), class: "button-50" %>
 <% end %>
+</div>
