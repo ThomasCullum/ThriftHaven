@@ -22,7 +22,10 @@
                   <% if @item.user == current_user %>
                     <%= link_to 'Edit Item', edit_item_path(@item), class: 'button-50' %>
                   <% else %>
-                    <p>No bid form available.</p>
+                    <%= simple_form_for [@item, @item.bids.build] do |form| %>
+                      <%= form.input :amount, label: "Bid Amount", input_html: { step: 0.01 } %>
+                      <%= form.button :submit, "Place Bid", class: 'button-50' %>
+                    <% end %>
                   <% end %>
                 <% end %>
               <% end %>
@@ -52,8 +55,8 @@
                     <br>
                     <% if @item.user == current_user && bid.pending? %>
                       <div class="row">
-                        <%= link_to 'Approve', items_path(@item, bid), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'button-50' %>
-                        <%= link_to 'Decline', item_path(@item, bid), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'button-50' %>
+                        <%= link_to 'Approve', items_path(@item, bid), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'button-50' %>
+                        <%= link_to 'Decline', item_path(@item, bid), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'button-50' %>
                       </div>
                     <% else %>
                       <%= bid.status.capitalize %>
